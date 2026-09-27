@@ -1,31 +1,54 @@
-# zeitgeber
+# Optimizador del consumo eléctrico
 
 ## Descripción del problema
 
-Un gran porcentaje de la población no sabe que ciertas decisiones que toman por el día son las causantes de la mala calidad del sueño. Si preguntamos a la gente si alguna vez han dormido más de 8 horas y se han levantado cansados, la respuesta va a ser que sí. Sin embargo, esto no es biológicamente normal. El cuerpo humano está diseñado para que, si se dan las condiciones adecuadas, podamos dormir perfectamente. El problema es que sufrimos una desconexión entre nuestro reloj biológico interno y nuestras rutinas modernas, lo que se podría definir en que vivimos en cuerpos prehistóricos con hábitos del siglo XXI.
-
-## Mi relación con el problema
-
-En mi caso, como estudiante, el horario sueño es lo más parecido a una montaña rusa. En el curso 2025/26 tenía horario de tardes en la universidad, por lo que había días que me acostaba a altas horas de la madrugada y me levantaba prácticamente cuando me tenía que ir a la universidad. Pese a dormir un buen número de horas, me levantaba destrozado, como si todas esas horas hubieran sido en vano. Además, me afectaba en el día a día, porque me notaba cansado y débil. Más tarde me di cuenta de la importancia que tiene el sueño, no solo en nuestro día a día, sino en la vida. No obstante, ser estudiante de ingeniería informática implica estar muchas horas delante de pantallas, estar en la clase con luz artificial, etc. Pese a saber la importancia que tiene el sueño, no sé qué hábitos debo seguir en mi día a día para que la calidad del sueño sea la máxima a la que puedo optar, porque cada día se hacen cosas diferentes, y todo eso afecta al sueño. Por ejemplo, no es lo mismo un día de playa que un día en el que estés 8 horas sentado en una silla y recibiendo luz artificial. 
-
-## A quién afecta
-
-Todo esto no sólo me ocurre a mí, sino que le ocurre a gente que trabaja con turnos, gente que los fines de semana trasnocha, etc. El cuerpo está diseñado para ir a dormir a ciertas horas, y si cada día nos acostamos a una hora diferente, al final es como si sometiéramos a nuestro cuerpo a un jet lag constante.
-
-## Por qué lo que hay ahora es insuficiente
-
-Para mejorar el descanso y tener unos buenos hábitos, no basta con dormir 8 horas, sino que hay que conocer qué son los ritmos circadianos y cómo evitar alterarlos. Además, las circunstancias de cada día son distintas, lo que influye a la hora de calcular dichos ciclos. Por lo tanto, no vale con una aplicación que ofrezca recomendaciones estáticas.
-
-## Datos del problema
-
-Para este problema únicamente se necesitan 3 simples datos, y estos datos estarán al alcance de cualquier persona, ya que son los siguientes:
-- Exposición a la luz (tanto luz natural como luz artificial)
-- Hora de dormirse y hora de despertarse
-- Cantidad de cafeína ingerida
-
-## Por qué es necesario el despliegue de una aplicación en la nube
-
-Se necesita un servidor que recopile dichos datos y, en función de ellos, haga los cálculos necesarios. Por ejemplo, para calcular la deuda de sueño, no basta con saber cuánto has dormido esa noche, sino que es un cálculo estadístico basado en los datos de varios días.
+Hablando con mi tía, me contó que ella revisa cada tarde el precio de la luz por horas antes de decidir cuándo poner la lavadora o el aire acondicionado, y así ahorrar en la factura. 
+En cambio, en mi casa nadie hace ese cálculo, sino que cada electrodoméstico se enciende cuando se necesita.
+En mi caso el margen es estrecho, ya que tenemos 3,45kW contratados y algunos electrodomésticos de gran consumo: 3 aires acondicionados, 1 horno, 1 vitrocerámica, 1 lavadora y 1 brasero. Por lo tanto, más de una vez nos ha pasado que han coincidido encendidos dos de estos aparatos y nos hemos acercado al límite, incluso haciendo que salte el ICP (Interruptor de Control de Potencia).
+Esto afecta a cualquier hogar con este tipo de tarifas y con una potencia contratada limitada, especialmente a quiénes tienen varios electrodomésticos de consumo alto y no llevan un control del precio y de la potencia de cada uno.
 
 ## Tarjetas de rol y configuración del repositorio
-Todas las imágenes necesarias se encuentran disponibles [aquí](objetivos/Objetivo0.md)
+
+### Juego de rol
+
+Ficha del cliente
+![Ficha del cliente](fotos/cliente.jpeg)
+
+Ficha del desarrollador
+![Ficha del desarrollador](fotos/desarrollador.jpeg)
+
+Ficha de validación
+![Ficha de validación](fotos/validacion.jpeg)
+
+### Configuración previa realizada
+
+[Clave SSH](fotos/ssh.png)
+
+[Configuración SSH](fotos/sshconfig.png)
+
+## Lista de comprobación
+
+**¿Se trata de un problema real del que se tenga conocimiento personal?**
+
+Sí, es un problema que vivo en mi propia casa. Con la potencia que tenemos contratada, alguna vez se nos ha ido la luz cuando usamos varios electrodomésticos de consumo alto.
+
+**¿Se trata de un problema que para solucionar requiera el despliegue de una aplicación en la nube?**
+
+Sí. El precio del día siguiente lo publica la Red Eléctrica Española cada tarde, y el cálculo del horario óptimo debe hacerse justo después, todos los días y sin necesidad de que nadie tenga que acordarse de ello. 
+Si hubiera que tener un ordenador encendido justo en ese momento, fallaría cualquier día que no hubiera nadie pendiente.
+
+**¿La solución requiere una cierta cantidad de lógica de negocio, en vez de solucionarse sólo almacenando y buscando?**
+
+Correcto. Hay que calcular, para cada electrodoméstico programable, en qué franjas horarias encenderlo, y teniendo en cuenta que el coste total, según el precio de cada hora, sea el mínimo posible. También habrá que tener en cuenta que la suma de potencias activas en cualquier momento no supere la potencia contratada.
+
+**¿Se ha incluido la configuración del repositorio y se ha enlazado desde el 'README'?**
+
+Sí, todas las capturas requeridas se han incluido arriba.
+
+**¿Se ha incluido y enlazado correctamente la fotografía de la tarjeta del juego de rol en el 'README' subiéndola al repositorio?**
+
+Sí, las imágenes necesarias se han subido al repositorio y están enlazadas arriba.
+
+**¿El estudiante tiene todos los datos necesarios para poder resolver el problema, o va a requerir que el usuario los introduzca?**
+
+El precio de la luz según la hora es un dato público, la potencia contratada la he obtenido de mi propia factura, y el consumo y duración de cada electrodoméstico programable se ha obtenido de su etiqueta energética o de su ficha técnica.
